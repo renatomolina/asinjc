@@ -8,8 +8,6 @@ class ProductForm extends React.Component {
           name="product[asin]"
         />
         <input type="submit" />
-        <br/>
-        <a href='/products'>See all amazon products</a>
       </div>
     )    
   }

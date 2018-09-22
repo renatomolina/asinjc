@@ -16,5 +16,4 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require server_rendering
 //= require_tree .
