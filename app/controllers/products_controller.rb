@@ -7,11 +7,11 @@ class ProductsController < ApplicationController
     product = ProductParser.build_product(params[:product][:asin])
     if product && product.save
       flash[:notice] = "Product was created."
-      redirect_to new_product_path
     else
       flash[:error] = 'ASIN invalid.'
-      redirect_to new_product_path
     end
+
+    redirect_to new_product_path
   end
 
   def index
