@@ -1,0 +1,11 @@
+.alert {
+  font-weight: bold;
+}
+
+.alert-error {
+  color: #ff0000;
+}
+
+.alert-notice {
+  color: #118811;
+}
