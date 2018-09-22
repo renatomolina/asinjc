@@ -1,6 +1,6 @@
 <%= form_for(@product) do |form| %>
   <%= react_component("ProductForm", {}, { prerender: true} ) %>
 <% end %>
-
+<br/>
 <%= link_to 'See all amazon products', products_path %>
 

@@ -2,7 +2,8 @@ class ProductForm extends React.Component {
   render() {
     return (
       <div>
-        <label>ASIN:</label>
+        <h2>Welcome friend!</h2>
+        <label>Type ASIN:</label>
         <input
           type="text"
           name="product[asin]"
