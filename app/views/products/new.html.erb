@@ -2,5 +2,11 @@
   <%= react_component("ProductForm", {}, { prerender: true} ) %>
 <% end %>
 <br/>
-<%= link_to 'See all amazon products', products_path %>
 
+<hr/>
+<h2>Product's List</h2>
+<% if @products.any? %>
+  <%= render @products %>
+<% else %>
+  <span> There are no products registered. </span>
+<% end %>

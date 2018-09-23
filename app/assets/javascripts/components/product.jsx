@@ -2,20 +2,20 @@ class Product extends React.Component {
   render() {
     return (
       <div>
-        <label>ASIN:</label>
-        <label>{this.props.product.asin}</label>
+        <strong>ASIN: </strong>
+        <span>{this.props.product.asin}</span>
         <br/>
         
-        <label>Dimensions:</label>
-        <label>{this.props.product.dimensions}</label>
+        <strong>Dimensions: </strong>
+        <span>{this.props.product.dimensions}</span>
         <br/>
 
-        <label>Rank:</label>
-        <label>{this.props.product.rank}</label>
+        <strong>Rank: </strong>
+        <span>{this.props.product.rank}</span>
         <br/>
 
-        <label>Category:</label>
-        <label>{this.props.product.category}</label>
+        <strong>Category: </strong>
+        <span>{this.props.product.category}</span>
         <br/>
         <hr/>
       </div>

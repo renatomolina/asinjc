@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-  let(:category) { Product.new }
-
   describe 'GET new' do
     def send_request
       get :new
@@ -17,21 +15,14 @@ RSpec.describe ProductsController, type: :controller do
       send_request
       expect(response).to render_template(:new)
     end
-  end
 
-  describe 'GET index' do
-    def send_request
-      get :index
-    end
+    it 'loads and assigns all products order desc by date to @products' do
+      Product.create(asin: 'a')
+      Product.create(asin: 'b')
+      Product.create(asin: 'c')
 
-    it 'loads and assigns all products to @products' do
       send_request
-      expect(assigns(:products)).to eq(Product.all)
-    end
-
-    it 'renders :index template' do
-      send_request
-      expect(response).to render_template(:index)
+      expect(assigns(:products)).to eq(Product.order(created_at: :desc).all)
     end
   end
 
@@ -52,7 +43,7 @@ RSpec.describe ProductsController, type: :controller do
 
       it 'notifies user that product was created via flash notice' do
         send_request
-        expect(flash[:notice]).to match(/Product was created/i)
+        expect(flash[:notice]).to match(/Product created./)
       end
     end
 

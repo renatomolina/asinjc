@@ -3,7 +3,7 @@ class ProductForm extends React.Component {
     return (
       <div>
         <h2>Welcome friend!</h2>
-        <label>Type ASIN:</label>
+        <label>Enter the ASIN:</label>
         <input
           type="text"
           name="product[asin]"

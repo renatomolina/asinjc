@@ -1,13 +1,13 @@
 class ProductParser
   def self.build_product(asin)
     begin
-      page = Nokogiri::HTML(open("http://www.amazon.com/dp/#{asin}"))
+      page = Nokogiri::HTML(open("https://www.amazon.com/dp/#{asin}"))
 
       product = Product.new(
         asin: asin,
         dimensions: parse_product_dimensions(page),
         category: parse_category(page),
-        rank: parse_rank(page) || "Not found"
+        rank: parse_rank(page)
       )
 
       product
@@ -25,15 +25,17 @@ class ProductParser
 
   def self.parse_category(page)
     rank_category_element_text = rank_category_element(page)
-    rank_category_element_text.split(' ').last || "Not found"
+    return 'Not found' if rank_category_element_text.nil?
+    rank_category_element_text[/(?<= in ).*/]
   end
 
   def self.parse_rank(page)
     rank_category_element_text = rank_category_element(page)
-    rank_category_element_text[/\d+(\,\d+)?/] || "Not found"
+    return 'Not found' if rank_category_element_text.nil?
+    rank_category_element_text[/\d+(\,\d+)?/]
   end
 
   def self.rank_category_element(page)
-    page.inner_html[/(\d+(\,\d+)?)\sin\s\w+[^(]*/]
+    page.inner_html[/\#(\d+(\,\d+)?)\sin\s\w+[^(]*/]
   end
 end
