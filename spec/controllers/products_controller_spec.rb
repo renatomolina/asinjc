@@ -6,11 +6,6 @@ RSpec.describe ProductsController, type: :controller do
       get :new
     end
 
-    it 'loads a new Product' do
-      send_request
-      expect(assigns(:product)).to be_kind_of(Product)
-    end
-
     it 'renders :new template' do
       send_request
       expect(response).to render_template(:new)
@@ -34,7 +29,7 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     context 'given a valid ASIN' do
-      let(:params) { { product: { asin: 'B002QYW8LW' } } }
+      let(:params) { { asin: 'B002QYW8LW' } }
 
       it 'redirect to new product page' do
         send_request
@@ -49,28 +44,28 @@ RSpec.describe ProductsController, type: :controller do
 
     context 'given a repeated ASIN' do
       before { Product.create(asin: 'B002QYW8LW') }
-      let(:params) { { product: { asin: 'B002QYW8LW' } } }
+      let(:params) { { asin: 'B002QYW8LW' } }
 
       it 'redirect to new product page' do
         send_request
         expect(response).to redirect_to(new_product_path)
       end
 
-      it 'notifies user that product was created via flash notice' do
+      it 'notifies user that product is already taken via flash notice' do
         send_request
         expect(flash[:error]).to match(/Asin has already been taken/)
       end
     end
 
     context 'given a invalid ASIN' do
-      let(:params) { { product: { asin: 'FAKE-ASIN' } } }
+      let(:params) { { asin: 'FAKE-ASIN' } }
 
       it 'redirect to new product page' do
         send_request
         expect(response).to redirect_to(new_product_path)
       end
 
-      it 'notifies user that something wrong happened via flash notice' do
+      it 'notifies user that ASIN is invalid via flash notice' do
         send_request
         expect(flash[:error]).to match(/Invalid ASIN/)
       end

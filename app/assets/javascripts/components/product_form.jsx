@@ -3,12 +3,14 @@ class ProductForm extends React.Component {
     return (
       <div>
         <h2>Welcome friend!</h2>
-        <label>Enter the ASIN:</label>
-        <input
-          type="text"
-          name="product[asin]"
-        />
-        <input type="submit" />
+        <form action='/products' method='post'>
+          <label>Enter the ASIN:</label>
+          <input
+            type="text"
+            name="asin"
+          />
+          <input type="submit" />
+        </form>
       </div>
     )    
   }

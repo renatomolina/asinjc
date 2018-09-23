@@ -1,11 +1,12 @@
 class ProductsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def new
-    @product = Product.new
     @products = Product.order(created_at: :desc).all
   end
 
   def create
-    product = ProductParser.build_product(params[:product][:asin])
+    product = ProductParser.build_product(params[:asin])
     if product
       if product.save
         flash[:notice] = "Product created."

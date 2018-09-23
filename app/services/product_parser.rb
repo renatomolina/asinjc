@@ -1,5 +1,5 @@
 class ProductParser
-  def self.build(asin)
+  def self.build_product(asin)
     begin
       page_content = open("https://www.amazon.com/dp/#{asin}").read
 
