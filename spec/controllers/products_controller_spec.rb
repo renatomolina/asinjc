@@ -40,10 +40,15 @@ RSpec.describe ProductsController, type: :controller do
         send_request
         expect(flash[:notice]).to match(/Product created./)
       end
+
+      it 'adds a product in the list' do
+        expect {send_request}.to change(Product, :count).by(1)
+      end
     end
 
     context 'given a repeated ASIN' do
       before { Product.create(asin: 'B002QYW8LW') }
+
       let(:params) { { asin: 'B002QYW8LW' } }
 
       it 'redirect to new product page' do
@@ -57,7 +62,7 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
 
-    context 'given a invalid ASIN' do
+    context 'given an invalid ASIN' do
       let(:params) { { asin: 'FAKE-ASIN' } }
 
       it 'redirect to new product page' do

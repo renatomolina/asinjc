@@ -7,7 +7,7 @@ describe ProductParser do
 
       it 'returns a product' do
         product_built = described_class.build_product(asin)
-        expect(product_built.asin).to eq(asin) 
+        expect(product_built.asin).to eq(asin)
         expect(product_built).to be_kind_of(Product)
       end
     end

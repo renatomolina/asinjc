@@ -1,4 +1,4 @@
-class Product extends React.Component {
+class ProductItem extends React.Component {
   render() {
     return (
       <div>

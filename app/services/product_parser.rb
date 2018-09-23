@@ -9,7 +9,7 @@ class ProductParser
         category: category_parser(page_content),
         rank: rank_parser(page_content)
       )
-    rescue
+    rescue OpenURI::HTTPError
       return nil
     end
   end
