@@ -3,7 +3,7 @@ require 'rails_helper'
 describe ProductParser do
   describe '.build_product' do
     context 'asin is valid' do
-      let!(:asin) { 'B002QYW8LW' }
+      let(:asin) { 'B002QYW8LW' }
 
       it 'returns a product' do
         product_built = described_class.build_product(asin)
@@ -11,7 +11,7 @@ describe ProductParser do
         expect(product_built).to be_kind_of(Product)
       end
     end
-  
+
     context 'asin is invalid' do
       let(:asin) { 'FAKEASIN' }
 

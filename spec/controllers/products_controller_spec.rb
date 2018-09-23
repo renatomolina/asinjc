@@ -47,6 +47,21 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
 
+    context 'given a repeated ASIN' do
+      before { Product.create(asin: 'B002QYW8LW') }
+      let(:params) { { product: { asin: 'B002QYW8LW' } } }
+
+      it 'redirect to new product page' do
+        send_request
+        expect(response).to redirect_to(new_product_path)
+      end
+
+      it 'notifies user that product was created via flash notice' do
+        send_request
+        expect(flash[:error]).to match(/Asin has already been taken/)
+      end
+    end
+
     context 'given a invalid ASIN' do
       let(:params) { { product: { asin: 'FAKE-ASIN' } } }
 
@@ -57,7 +72,7 @@ RSpec.describe ProductsController, type: :controller do
 
       it 'notifies user that something wrong happened via flash notice' do
         send_request
-        expect(flash[:error]).to match(/ASIN invalid/i)
+        expect(flash[:error]).to match(/Invalid ASIN/)
       end
     end
   end
