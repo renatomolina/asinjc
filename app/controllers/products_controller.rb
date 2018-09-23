@@ -9,12 +9,12 @@ class ProductsController < ApplicationController
     product = ProductParser.build_product(params[:asin])
     if product
       if product.save
-        flash[:notice] = "Product created."
+        flash[:notice] = "Product created"
       else
         flash[:error] = product.errors.full_messages.first
       end
     else
-      flash[:error] = 'Invalid ASIN.'
+      flash[:error] = 'Invalid ASIN'
     end
 
     redirect_to new_product_path
