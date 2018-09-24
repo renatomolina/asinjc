@@ -15,6 +15,12 @@
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
 
+      <% if @errors %>
+        <% @errors.each do |attribute, message| %>
+          <div class="alert alert-error"><%= attribute %> <%= message %></div>
+        <% end %>
+      <% end %>
+
       <%= yield %>
     </div>
   </body>

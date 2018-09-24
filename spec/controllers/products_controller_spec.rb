@@ -51,14 +51,18 @@ RSpec.describe ProductsController, type: :controller do
 
       let(:params) { { asin: 'B002QYW8LW' } }
 
-      it 'redirect to new product page' do
+      it 'renders :new template' do
         send_request
-        expect(response).to redirect_to(new_product_path)
+        expect(response).to render_template(:new)
       end
 
-      it 'notifies user that product is already taken via flash notice' do
+      it 'loads and assigns all products order desc by date to @products' do
+        Product.create(asin: 'a')
+        Product.create(asin: 'b')
+        Product.create(asin: 'c')
+
         send_request
-        expect(flash[:error]).to match(/Asin has already been taken/)
+        expect(assigns(:products)).to eq(Product.order(created_at: :desc).all)
       end
     end
 

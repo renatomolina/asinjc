@@ -10,13 +10,15 @@ class ProductsController < ApplicationController
     if product
       if product.save
         flash[:notice] = "Product created"
+        redirect_to new_product_path
       else
-        flash[:error] = product.errors.full_messages.first
+        @errors = product.errors
+        @products = Product.order(created_at: :desc).all
+        render 'new'
       end
     else
       flash[:error] = 'Invalid ASIN'
+      redirect_to new_product_path
     end
-
-    redirect_to new_product_path
   end
 end
