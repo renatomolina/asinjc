@@ -38,7 +38,7 @@ RSpec.describe ProductsController, type: :controller do
 
       it 'notifies user that product was created via flash notice' do
         send_request
-        expect(flash[:notice]).to match(/Product created./)
+        expect(flash[:notice]).to match(/Product created/)
       end
 
       it 'adds a product in the list' do
